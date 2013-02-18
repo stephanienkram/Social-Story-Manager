@@ -1,0 +1,250 @@
+OBJECT OUTLINES
+
+******************
+******************
+AUTHORS
+
+**AUTHORS DB**
+authorid int
+username text
+password text
+joined int (date)
+summary text
+location text
+
+**AUTHORSTATUS DB**
+statusid int
+authorid int
+status text
+date int
+
+**AUTHORFOLLOW DB**
+followid int
+follower int
+followee int
+date int
+followstories bool (new story added)
+follownewauthor bool (author added author they're following)
+follownewstory bool (author added story they're following)
+followstatus bool (new status added)
+
+
+class Author:
+init(username, password): creates new author
+
+*init methods*
+newStatus(status): creates new status update
+newProject(name, elevator): creates new project
+
+*display methods*
+displaySelfProject(): displays all own projects
+displayAuthors(): displays authors following stream
+displayProjects(): displays projects following stream
+
+*other*
+followProject(projectid): sets to follow story
+followAuthor(authorid, stories, newauthor, newstory, status): sets to follow author with params
+
+
+******************
+******************
+PROJECTS
+
+**PROJECTS DB**
+projectid int
+name text
+elevator text
+skeleton text
+notes text
+
+**PROJECTSTATUS DB**
+pstatusid int
+projectid int
+status text (author generated status update)
+date int
+
+**PROJECTUPDATES DB**
+updateid int
+projectid int
+date int
+updated text (what section was updated. might be in int where int==some section id)
+
+**PROJECT_AUTHOR_LINK DB**
+linkid int
+projectid int
+authorid int
+
+**PROJECTFOLLOW DB**
+followid int
+projectid int
+authorid int
+
+class Project:
+init(name, elevator): creates new project
+
+*init methods*
+newCharacter(name, elevator): creates new character
+newChapter(title): creates new chapter
+newLocation(name, elevator): creates new location
+newOutline(title): creates new outline entry
+
+*display methods*
+displayCharacters(): displays all characters for project
+displayLocations(): displays all locations for project
+displayOutline(): generates current outline
+displayFull(): displays full text of story
+displayChapter(x): displays x chapter
+
+
+*other methods*
+addAuthor(authorid): adds another author
+
+
+******************
+******************
+OUTLINE
+
+**OUTLINE DB**
+outlineid int
+projectid int
+title text
+description text
+notes text
+
+
+(((
+haven't yet decided how to link outlines and chapters together...
+will it be that each outline will link to a chapter? multiple outlines to chapter? multiple chapters to outline?
+any can be handled with link table, just need to figure out how i'd want it to be used....
+or could just let it be open and people can make whatever links they want, it won't really matter...
+**OUTLINELINK DB**
+projectid int
+outlineid int
+chapterid int
+)))
+
+
+******************
+******************
+CHAPTERS
+-actual chapter text
+-both "chapter version" and "full text version", for whether people want to work in individual chapters, or work on the full text all at once
+	--"full text" version will be compiled from all texts, and is independently editable (and will update the chapters accordingly if chapters are specified)
+-each chapter will have notes available (characters included, timelines, notes, locations, links to pictures (chapter-specific pictures?), etc)
+
+**CHAPTER DB**
+chapterid int
+projectid int
+body text
+notes text
+
+**CHAPTER_CHARACTER DB**
+linkid int
+projectid int
+outlineid int
+characterid int
+
+**CHAPTER_LOCATIONS DB**
+linkid int
+projectid int
+outlineid int
+locationid int
+
+**CHAPTER_PICS DB**
+linkid int
+projectid int
+outlineid int
+pictureid int
+
+
+
+******************
+******************
+CHARACTERS
+-character descriptions
+-loads of subheadings, or just one big long heading (called summary)
+-links to pictures, list of chapters that they're in, locations they're in, timelines, etc
+
+**CHARACTER DB**
+projectid int
+characterid int
+name text
+elevator text
+
+**CHARACTERSUB DB**
+subid int
+projectid int
+characterid int
+heading text
+body text
+
+**CHARACTER_LOCATIONS DB**
+linkid int
+projectid int
+characterid int
+locationid int
+
+**CHARACTER_PICS DB**
+linkid int
+projectid int
+characterid int
+pictureid int
+
+
+
+******************
+******************
+LOCATIONS
+-similar to characters (descriptions, subheadings, names)
+-timelines
+
+**LOCATION DB**
+projectid int
+locationid int
+name text
+elevator text
+
+**LOCATIONSUB DB**
+subid int
+projectid int
+locationid int
+heading text
+body text
+
+**LOCATION_PICS DB**
+linkid int
+projectid int
+locationid int
+pictureid int
+
+**MAPS DB**
+projectid int
+locationid int
+mapid int
+name text
+summary text
+location text (in filesystem)
+
+
+******************
+******************
+PICTURES
+-pic gallery, with labels and links. nothing too snazzy here
+-organizable (include the id of all created characters, locations, etc, in choosing labels)
+
+**PICTURES DB**
+projectid int
+pictureid int
+name text
+location text (in filesystem)
+
+
+******************
+******************
+TIMELINE
+-click-n-drag timelines
+-UNDECIDED: whether to make periods of times (2am-5pm) and link up chapters/outline to it, or whether to have chapters/outline
+in chron order on timeline, with notes of what time period
+-not sure how to develop this quite yet
+
+

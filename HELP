@@ -1,0 +1,276 @@
+QUICK RAILS BREAKDOWN:
+
+ALWAYS USE SNAKE CASE IN-CODE, camel in generating
+
+********************
+** GEM MANAGEMENT **
+********************
+Gemfile manages all gems.
+
+Do in app folder:
+    >>>bundle update
+    >>>bundle install
+to get gems
+(also alternatively ./bundle)
+
+***********************
+** SERVER MANAGEMENT **
+***********************
+
+Do in app folder:
+    >>>rails server
+    (>>>rails server --binding=xxx.xxx.xxx.xxx)
+(also alternatively ./startServer)
+(Drunkserver is 192.168.1.10)
+
+
+*******************
+** DB MANAGEMENT **
+*******************
+
+bundle exec rake db:migrate - updates db from migration files
+bundle exec rake db:rollback - rolls back db from most recent migrate
+bundle exec rake db:test:prepare - prepares test db
+bundle exec rake db:migrate RAILS_ENV=production - creates production db
+bundle exec rake db:reset - reset db
+
+************
+** ROUTES **
+************
+
+in config/routes.rb
+
+routes are:
+get '<CONTROLLERNAME>/<PAGENAME>'
+
+find at:
+localhost:3000/<CONTROLLERNAME>/<PAGENAME>
+
+can be renamed to:
+match '/<PAGENAME>', to: '<CONTROLLERNAME>#<PAGENAME>'
+
+to find at:
+localhost:3000/<PAGENAME>
+
+set root as:
+root to: '<CONTROLLERNAME>#<PAGENAME>'
+
+(can also use:
+match '/', to: <CONTROLLERNAME>#<PAGENAME>
+)
+
+to get something like localhost:3000/<CONTROLLERNAME>/x, do
+resources: <CONTROLLERNAME>
+
+make sure to create app/views/<CONTROLLERNAME>/show.html.erb to use this,
+and update app/controller/<CONTROLLERNAME>s_controller.rb
+
+***********
+** VIEWS **
+***********
+
+rails auto-generates app/views/layouts/application.html.erb
+rails auto-generates app/assets/stylesheets/application.css
+
+css/javascript/images in app/assets (static items)
+
+** GENERATING VIEWS **
+views are generated alongside controllers with this command:
+rails generate controller <CONTROLLERNAME> <PAGENAME> <PAGENAME> .. <PAGENAME>
+
+make sure to have <CONTROLLERNAME> be a plural word, unlike models
+
+camel case is converted to snake case (eg: DifferentCase => different_case)
+write controllers in camel, they will become snakey
+
+app is updated at these areas (and these areas must be manually updated for later page additions):
+config/routes.rb:
+    get "<CONTROLLERNAME>/<PAGENAME>"
+app/controllers/<CONTROLLERNAME>.rb:
+    def <PAGENAME>
+    end
+app/views/<CONTROLLERNAME>/<PAGENAME>.html.erb:
+    <h1>StaticPages#<PAGENAME></h1>
+    <p>Find me in app/views/<CONTROLLERNAME>/<PAGENAME>.html.erb</p>
+    
+    
+use '--no-test-framework' to stop testers from being generated
+
+** DESTROYING VIEWS **
+destroying views involves destroying the corrosponding controller:
+rails destroy controller CamelCaseControllerName <PAGENAME> <PAGENAME> .. <PAGENAME>
+
+** WRITING VIEWS **
+links: <%= link_to "<NAME OF DESTINATION>", <PAGENAME>_path %> (use '#' in path for blank)
+in-line variable assign (before DOCTYPE): <% provide(:key, 'value') %>
+in-line variable use: <%= yield(:key) %>
+insert other page html: <%= yield %>
+include debugging: <%= debug(params) %>
+include debugging in dev: <%= debug(params) if Rails.env.development? %>
+grab parameters: params[]/params{}
+
+** STYLESHEETS **
+in application.css, there is a line: "*= require_tree" that requires all files in that folder.
+"*= require_self" is requiring self
+
+** PARTIALS **
+put in app/views/layouts/
+with format "_<NAME>.html.erb"
+include with: "<%= render 'layouts/<NAME>' %>"
+
+** FORMS **
+
+set any @<CONTROLLERNAME> in app/controllers/<CONTROLLERNAME>_controller.rb
+
+init with:
+<%= form_for(@<CONTROLLERNAME>) do |f| %>
+
+end with:
+<% end %>
+
+<%= f.label :<FORMATTR> %>
+<%= f.<INPUT_TYPE> :<ATTR> %>
+
+input types:
+text_field
+password_field
+submit
+
+** DEBUG **
+"localhost:3000/<CONTROLLERNAME>/1 isn't showing up"
+update routes to include:
+	resources: <CONTROLLERNAME>
+create page:
+	app/views/<CONTROLLERNAME>/show.html.erb
+update app/controllers/<CONTROLLERNAME>s_controller.rb:
+	def show
+    end
+	
+
+
+*******************
+** SPECIAL PAGES **
+*******************
+
+Server error pages are located in public/
+
+
+*****************
+** CONTROLLERS **
+*****************
+
+
+** GENERATING CONTROLLERS **
+
+identical to generating views. make sure to have <CONTROLLERNAME> be a plural word, unlike models
+
+rails generate controller <CONTROLLERNAME> <PAGENAME> <PAGENAME> .. <PAGENAME>
+
+camel case is converted to snake case (eg: DifferentCase => different_case)
+write controllers in camel, they will become snakey
+
+app is updated at these areas (and these areas must be manually updated for later page additions):
+config/routes.rb:
+    get "<CONTROLLERNAME>/<PAGENAME>"
+app/controllers/<CONTROLLERNAME>.rb:
+    def <PAGENAME>
+    end
+app/views/<CONTROLLERNAME>/<PAGENAME>.html.erb:
+    <h1>StaticPages#<PAGENAME></h1>
+    <p>Find me in app/views/<CONTROLLERNAME>/<PAGENAME>.html.erb</p>
+app/helpers/<CONTROLLERNAME>_helper.rb
+    
+    
+use '--no-test-framework' to stop testers from being generated
+
+
+************
+** MODELS **
+************
+
+** GENERATING MODELS **
+
+use this command:
+rails generate model <MODELNAME> <ATTR>:<TYPE> <ATTR>:<TYPE> ... <ATTR>:<TYPE>
+
+MODELNAME is single, unlike controllers and views
+
+this creates a migration (an "outline", so to say) of the eventual database tables
+
+app is updated in these areas:
+db/migrate/[timestamp]_create_<MODELNAME>.rb:
+	class Create<MODELNAME> is generated
+	
+** MIGRATING MODELS **
+
+commit model outline to db:
+bundle exec rake db:migrate
+
+changes in the app:
+app/models/<MODELNAME>.rb:
+	class <MODELNAME> created
+
+** ROLLBACK DB **
+
+rollback previos changes:
+bundle exec rake db:rollback
+
+** DEFINING MIGRATIONS **
+
+migrations are used to change existing db structure in some manner.
+Also a good way to keep track of changes
+
+use command:
+rails generate migration <MIGRATIONNAME>
+
+will have to modify db/migrate/[timestamp]_<MIGRATIONNAME>
+
+make sure migration names are descriptive
+rails will try to guess what you want based on name as to auto-generate migrations
+eg:
+names ending in "_to_<MODELNAME>" will apply the migration to that model
+
+** MIGRATION THINGS YOU CAN DO **
+
+things you can use migrations for:
+add uniqueness indeces:
+	add_index :<MODELNAME>, :<ATTR>, unique: true
+	add_column :<MODELNAME>, :<ATTR>, :<TYPE>
+	
+** MODEL STUFF **
+
+in app/models/<MODELNAME>.rb:
+
+stuff you can do with models:
+Validation: makes sure that <ATTR> is set, won't save otherwise:
+	validates :<ATTR>...
+		presence: true
+		length: { maximum: xx, minimum: xx }
+		format: { with: <REGEX> }
+		uniqueness: { true, case_sensitive: false }
+		
+Runs before saving (uses blocks?):
+	before_save {}
+
+** RANDOM MODEL STUFF **
+
+must manually save models
+
+<MODELNAME>.new: creates new model
+<MODELNAME>.create: creates and saves new model
+<MODELNAME>.destroy: destroys model
+<MODELNAME>.find(x): finds model with id of x
+<MODELNAME>.find_by_<ATTR>(x): finds model where <ATTR>==x (if more than one, return array?)
+<MODELNAME>.all: returns all <MODELNAME>s in an array
+
+<model>.reload.<ATTR>: reloads model so that recent (unsaved) changes are erased
+<model>.update_attributes(<ATTR>: 'value', <ATTR>: 'value'): changes and saves <ATTR> values
+<model>.errors: prints out errors
+<model>.errors.full_messages: prints out all errors
+
+
+*************
+** HELPERS **
+*************
+
+helpers are in app/helpers/<CONTROLLERNAME>_helper.rb, and provide additional functions

@@ -1,0 +1,155 @@
+Python rough for online story manager, to be later re-written in a more web-friendly language (likely Ruby)
+
+Social story manager, allowing authors to post their stories, and notes for their stories, in an easily sharable fashion.
+Combo github and Fitocracy for stories.
+
+Object Outlines:
+-authors
+-outline
+-chapters
+-characters
+-worldbuilding
+-pictures
+-timeline
+
+******************
+******************
+AUTHORS
+-username/password
+-personal summary page (?)
+-gender
+-location
+-author influences?
+
+DATABASES:
+authors - db of all authors
+authorstatus - db of status set by authors
+authorupdates - db of recent updates (don't know how to do this one yet, not init yet)
+
+SOCIAL ASPECT
+-people and stories have followers
+(they're independent of each other)
+-followers of stories--every update of story is in stream
+-followers of people--updates on adding new stories, following new people, and status updates
+
+DATABASES:
+authorfollow - db of author followers
+
+
+
+******************
+******************
+PROJECTS
+**SUMMARY**
+-basic plot notes:
+	--elevator pitch (<15 words)
+	--skeleton (1 page summary of story--agent grab summary)
+-includes basic world information (each major location + 1 sentence summary)
+-includes major character information (each major char + 1 sentence summary)
+-status updates on stories? (last 5 statuses)
+-last updated
+-maybe a forum-esque sort of thing for every story? for comments and reviews and stuff
+
+DATABASES:
+projects - db of all projects
+projectstatus - db of project statuses set by author
+projectupdates - db of recent updates to project
+project_author_link - links between authors and projects
+projectfollow - db of project followers
+
+
+
+******************
+******************
+OUTLINE
+-provides an outline of the story.
+-lets people rearrange them (click and drag)
+-spreedsheety
+-kind of like a regular outline, have little titles, and descriptions of scenes
+ --allows linking to chapters that fulfill this outline requirement (something like that?)
+-notez for outline
+-does not take into consideration possible multiple outlines
+
+DATABASES:
+outline - db of all outlines
+
+
+
+(((
+haven't yet decided how to link outlines and chapters together...
+will it be that each outline will link to a chapter? multiple outlines to chapter? multiple chapters to outline?
+any can be handled with link table, just need to figure out how i'd want it to be used....
+or could just let it be open and people can make whatever links they want, it won't really matter...
+**OUTLINELINK DB**
+projectid int
+outlineid int
+chapterid int
+)))
+
+
+******************
+******************
+CHAPTERS
+-actual chapter text
+-both "chapter version" and "full text version", for whether people want to work in individual chapters, or work on the full text all at once
+	--"full text" version will be compiled from all texts, and is independently editable (and will update the chapters accordingly if chapters are specified)
+-each chapter will have notes available (characters included, timelines, notes, locations, links to pictures (chapter-specific pictures?), etc)
+
+DATABASES:
+chapters - db of all chapters
+chapter_character - link between chapters and characters
+chapter_locations - link between chapters and locations
+chapter_pics - link between chapters and pics
+
+
+
+
+******************
+******************
+CHARACTERS
+-character descriptions
+-loads of subheadings, or just one big long heading (called summary)
+-links to pictures, list of chapters that they're in, locations they're in, timelines, etc
+
+DATABASES:
+characters
+charactersub
+character_locations
+character_pics
+
+
+
+******************
+******************
+LOCATIONS
+-similar to characters (descriptions, subheadings, names)
+-timelines
+
+DATABASES:
+locations
+locationsub
+location_pics
+maps
+
+
+
+******************
+******************
+PICTURES
+-pic gallery, with labels and links. nothing too snazzy here
+-organizable (include the id of all created characters, locations, etc, in choosing labels)
+
+DATABASES:
+pictures
+
+
+
+******************
+******************
+TIMELINE
+-click-n-drag timelines
+-UNDECIDED: whether to make periods of times (2am-5pm) and link up chapters/outline to it, or whether to have chapters/outline
+in chron order on timeline, with notes of what time period
+-not sure how to develop this quite yet
+
+
