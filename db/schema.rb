@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219022508) do
+ActiveRecord::Schema.define(:version => 20130219161428) do
 
   create_table "author_statuses", :force => true do |t|
     t.string   "status"
@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(:version => 20130219022508) do
     t.string   "email"
     t.string   "summary"
     t.string   "location"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "password_digest"
     t.string   "remember_token"
+    t.boolean  "admin",           :default => false
   end
 
   add_index "authors", ["email"], :name => "index_authors_on_email", :unique => true

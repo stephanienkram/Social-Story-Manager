@@ -1,0 +1,6 @@
+<li>
+<%= link_to author.username, author %>
+<% if current_author.admin? && !current_author?(author) %>
+	| <%= link_to "delete", author, method: :delete, data: {confirm: "You sure?"} %>
+<% end %>
+</li>

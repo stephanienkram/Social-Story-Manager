@@ -6,9 +6,11 @@
 <li><%= link_to "Help", help_path %></li>
 
 <% if signed_in? %>
+<li> | </li>
 <li><%= link_to "Authors", authors_path %></li>
 <li><%= link_to "Profile", current_author %></li>
 <li><%= link_to "Settings", edit_author_path(current_author) %></li>
+<li> | </li>
 <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
 <% else %>
 <li><%= link_to "Sign In", signin_path %></li>

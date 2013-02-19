@@ -63,3 +63,16 @@ padding:3px;
   margin-top: 45px;
   @include box_sizing;
 }
+
+.pag ul {
+list-style-type:none;
+}
+
+.pag li {
+display: inline;
+padding:3px;
+}
+
+.pag a {
+text-decoration:none;
+}
