@@ -1,0 +1,14 @@
+<% provide(:title, @project.name) %>
+
+<%= link_to "<<< Back to projects", projects_path(@project.author.id) %>
+
+<h1><%= @project.name %></h1>
+<p>by <%= @project.author.username %></p>
+<p><i><%= link_to "Edit", edit_project_path %></i></p>
+<p><i><%= @project.elevator %></i></p>
+
+<p><%= @project.skeleton %></p>
+
+<pre>
+<%= @project.notes %></p>
+</pre>

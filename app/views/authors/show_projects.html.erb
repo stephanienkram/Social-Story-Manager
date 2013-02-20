@@ -1,0 +1,13 @@
+<% provide(:title, "Projects") %>
+
+<h1>Projects</h1>
+
+<p>by <%= @author.username %></p>
+
+<p><%= link_to "New Project", new_project_path %></p>
+
+
+<% if @projects.any? %>
+<%= render @projects %>
+<div class="pag"><%= will_paginate @projects %></div>
+<% end %>

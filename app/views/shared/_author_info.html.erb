@@ -1,0 +1,3 @@
+<h1><%= current_author.username %></h1>
+<%= link_to "view my profile", current_author %>
+<%= pluralize(current_author.author_statuses.count, "status") %>

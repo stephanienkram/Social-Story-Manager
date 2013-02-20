@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219161428) do
+ActiveRecord::Schema.define(:version => 20130220191508) do
+
+  create_table "author_authors", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "author_authors", ["followed_id"], :name => "index_author_authors_on_followed_id"
+  add_index "author_authors", ["follower_id", "followed_id"], :name => "index_author_authors_on_follower_id_and_followed_id", :unique => true
+  add_index "author_authors", ["follower_id"], :name => "index_author_authors_on_follower_id"
 
   create_table "author_statuses", :force => true do |t|
     t.string   "status"
@@ -145,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20130219161428) do
     t.string   "notes"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "author_id"
   end
 
   create_table "projects_authors", :id => false, :force => true do |t|

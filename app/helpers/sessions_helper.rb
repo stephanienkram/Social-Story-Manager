@@ -34,4 +34,15 @@ module SessionsHelper
     def store_location
         session[:return_to] = request.url
     end
+    
+    def current_author?(author)
+    	author == current_author
+    end
+    
+    def signed_in_author
+    	unless signed_in?
+    		store_location
+    		redirect_to signin_url, notice: "Please sign in"
+    	end
+    end
 end

@@ -1,4 +1,15 @@
+<% @author ||= current_author %>
 <% provide(:title, @author.username) %>
 <h1><%= @author.username %></h1>
-<p><b><%= @author.location %></b></p>
-<p><%= @author.summary %>
+<p><b><%= @author.location %></b> <%= link_to "Projects", projects_author_path(@author.id) %></p>
+<%= render 'shared/stats' %>
+<%= render 'follow_form' if signed_in? %>
+
+
+<p><%= @author.summary %></p>
+
+<% if @author.author_statuses.any? %>
+<h3>Statuses: <%= @author.author_statuses.count %></h3>
+<%= render @author_statuses %>
+<div class="pag"><%= will_paginate @author_statuses %>
+<% end %>

@@ -1,20 +1,27 @@
 <div class="header">
 <ul>
+
 <li><%= link_to "Home", root_path %></li>
+
 <li><%= link_to "About", about_path %></li>
+
 <li><%= link_to "Contact", contact_path %></li>
+
 <li><%= link_to "Help", help_path %></li>
 
 <% if signed_in? %>
 <li> | </li>
 <li><%= link_to "Authors", authors_path %></li>
+<%= link_to "Projects", projects_author_path(current_author.id) %>
 <li><%= link_to "Profile", current_author %></li>
 <li><%= link_to "Settings", edit_author_path(current_author) %></li>
 <li> | </li>
 <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
 <% else %>
+
 <li><%= link_to "Sign In", signin_path %></li>
 <% end %> 
+
 
 </ul>
 </div>

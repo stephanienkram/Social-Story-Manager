@@ -1,0 +1,6 @@
+<li>
+<%= link_to project.name, project %>
+<p><% if current_author?(project.author) %>
+<%= link_to "Delete", project, method: :delete, data: {confirm: "You sure?"} %>
+<% end %>
+</li>

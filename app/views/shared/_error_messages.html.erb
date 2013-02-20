@@ -1,6 +1,6 @@
-<% if @author.errors.any? %>
-<p>The form contains <%= pluralize(@author.errors.count, "error") %>.</p>
-<ul><% @author.errors.full_messages.each do |msg| %>
+<% if object.errors.any? %>
+<p>The form contains <%= pluralize(object.errors.count, "error") %>.</p>
+<ul><% object.errors.full_messages.each do |msg| %>
 <li>* <%= msg %></li>
 <% end %>
 </ul>

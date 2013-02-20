@@ -1,3 +1,13 @@
 <% provide(:title, 'Home') %>
 <h1>Home</h1>
 <p>This is the home page of the story manager project.</p>
+
+<% if signed_in? %>
+	<%= render 'shared/author_info' %>
+	<%= render 'shared/stats' %>
+	<%= render 'shared/status_form' %>
+	<h3>Status Feed</h3>
+	<%= render 'shared/feed' %>
+<% else %>
+	<% link_to "Sign up now!", signup_path %>
+<% end %>

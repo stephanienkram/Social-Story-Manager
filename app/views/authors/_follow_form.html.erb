@@ -1,0 +1,7 @@
+<% unless current_author?(@author) %>
+	<% if current_author.following?(@author) %>
+		<%= render 'unfollow' %>
+	<% else %>
+		<%= render 'follow' %>
+	<% end %>
+<% end %>

@@ -1,0 +1,3 @@
+<% @author ||= current_author %>
+<a href="<%= following_author_path(@author) %>"><%= @author.followed_authors.count %> following</a>
+<a href="<%= followers_author_path(@author) %>"><%= @author.followers.count %> followers</a>

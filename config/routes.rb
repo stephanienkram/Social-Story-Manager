@@ -1,7 +1,13 @@
 StoryRough::Application.routes.draw do
-    resources :authors
+    resources :authors do
+    	member do
+    		get :following, :followers, :projects
+    	end
+    end
     resources :projects
     resources :sessions, only: [:new, :create, :destroy]
+    resources :author_statuses, only: [:create, :destroy]
+    resources :author_authors, only: [:create, :destroy]
 
   get "authors/new"
   match '/signup', to: 'authors#new'

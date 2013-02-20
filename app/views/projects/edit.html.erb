@@ -1,0 +1,21 @@
+<% provide(:title, "Edit " + @project.name) %>
+
+<h1>Edit <%= @project.name %></h1>
+
+<%= form_for(@project) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= f.label :name %>
+<%= f.text_field :name %><br>
+
+<%= f.label :elevator %>
+<%= f.text_field :elevator %><br>
+
+<%= f.label :skeleton %>
+<%= f.text_area :skeleton %><br>
+
+<%= f.label :notes %>
+<%= f.text_area :notes %><br>
+
+<%= f.submit "Update Project" %>
+<% end %>
