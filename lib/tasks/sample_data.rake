@@ -18,24 +18,28 @@ def make_authors
     name  = Faker::Name.name
     email = "name-#{n+1}@name.com"
     password  = "password"
+    location = Faker::Lorem.words(2)[0].capitalize
+    summary = Faker::Lorem.sentence(5)
     Author.create!(username:     name,
                  email:    email,
                  password: password,
-                 password_confirmation: password)
+                 password_confirmation: password,
+                 location: location,
+                 summary: summary)
   end
 end
 
 def make_statuses
   authors = Author.all(limit: 6)
-  50.times do
+  20.times do
     content = Faker::Lorem.sentence(5)
     authors.each { |author| author.author_statuses.create!(status: content) }
   end
 end
 
 def make_projects
-  authors = Author.all(limit: 6)
-  10.times do
+  authors = Author.all
+  5.times do
   	title = Faker::Lorem.words(1)[0].capitalize
     content = Faker::Lorem.sentence(2)
     authors.each { |author| author.projects.create!(name: content, elevator: content) }

@@ -1,3 +1,26 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.newProj a{
+margin-top:10px;
+margin-bottom: 10px;
+border: 3px solid #003366;
+background: #99CCFF;
+text-decoration:none;
+color:black;
+font-weight:bold;
+padding:5px;
+border-radius: 5px;
+box-shadow: 3px 3px 5px #cccccc;
+}
+
+.newProj a:hover {
+box-shadow: 1px 1px 3px #cccccc;
+background: #6699CC;
+}
+
+.projTime {
+font-style:italic;
+font-size:12px;
+}

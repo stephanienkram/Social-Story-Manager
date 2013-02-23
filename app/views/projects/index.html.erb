@@ -1,12 +1,9 @@
-<% provide(:title, "Projects") %>
+<% provide(:title, "All projects") %>
+<h1>All projects</h1>
 
-<h1>Projects</h1>
+<div class="pag"><%= will_paginate %></div>
 
-<p>by <%= @author.username %></p>
-
-<p><%= link_to "New Project", new_project_path %></p>
-
-<ul>
+<ul class="indexList">
 <%= render @projects %>
 </ul>
 

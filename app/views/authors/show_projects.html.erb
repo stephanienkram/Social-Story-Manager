@@ -2,12 +2,16 @@
 
 <h1>Projects</h1>
 
-<p>by <%= @author.username %></p>
+<p>by <%= link_to @author.username, @author %></p>
 
-<p><%= link_to "New Project", new_project_path %></p>
+<% if current_author?(@author) %>
+	<p><div class="newProj"><%= link_to "New Project", new_project_path %></div></p>
+<% end %>
 
-
+<ul class="indexList">
 <% if @projects.any? %>
 <%= render @projects %>
-<div class="pag"><%= will_paginate @projects %></div>
 <% end %>
+</ul>
+
+<div class="pag"><%= will_paginate @projects %></div>

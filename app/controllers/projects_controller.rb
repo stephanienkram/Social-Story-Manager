@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-    before_filter :signed_in_author, only: [:index, :edit, :update, :destroy]
+    before_filter :signed_in_author, only: [:edit, :update, :destroy]
     before_filter :correct_author, only: [:edit, :update, :destroy]
 
     def show
@@ -33,15 +33,7 @@ class ProjectsController < ApplicationController
 	end
 	
 	def index(id=nil)
-		begin
-			id = options[:id]
-			@author = Author.find(id)
-		rescue
-			@author = current_author
-		ensure		
-			@projects = @author.projects.paginate(page: params[:page])
-		end
-# 	  @projects = current_author.projects.paginate(page: params[:page])
+		@projects = Project.paginate(page: params[:page])
 	end
 	
 	def destroy

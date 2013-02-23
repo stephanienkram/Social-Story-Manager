@@ -1,6 +1,3 @@
 <li>
-<%= link_to project.name, project %>
-<p><% if current_author?(project.author) %>
-<%= link_to "Delete", project, method: :delete, data: {confirm: "You sure?"} %>
-<% end %>
+<%= link_to(raw("<span class='name'>") + project.name + raw("</span> by ") + project.author.username + raw("<br><div class='projTime'>") + time_ago_in_words(project.updated_at) + raw("</div><br>") + project.elevator, project) %>
 </li>

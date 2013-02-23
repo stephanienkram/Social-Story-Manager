@@ -1,6 +1,6 @@
 <li>
-<p><%= author_status.status %></p>
-<p><i>Posted <%= time_ago_in_words(author_status.created_at) %> ago.</p>
+<p><div class="status"><%= author_status.status %></div><br>
+<div class="statusTime">Posted <%= time_ago_in_words(author_status.created_at) %> ago.</div></p>
 <p><% if current_author?(author_status.author) %>
 <%= link_to "delete", author_status, method: :delete, data: {confirm: "You sure?"}, title: author_status.status %>
 <% end %>

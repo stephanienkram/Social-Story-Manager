@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-    before_filter :signed_in_author, only: [:index, :edit, :update, :destroy, :following, :followers]
+    before_filter :signed_in_author, only: [:edit, :update, :destroy, :following, :followers]
     before_filter :correct_author, only: [:edit, :update]
     before_filter :admin_author, only: :destroy
     
@@ -62,7 +62,7 @@ class AuthorsController < ApplicationController
     
     def projects
     	@author = Author.find(params[:id])
-    	@projects = @author.projects.paginate(page: params[:page], per_page: 5)
+    	@projects = @author.projects.paginate(page: params[:page])
     	render 'show_projects'
     end
     	   

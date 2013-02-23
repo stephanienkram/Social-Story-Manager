@@ -1,10 +1,14 @@
 <% provide(:title, @project.name) %>
 
-<%= link_to "<<< Back to projects", projects_path(@project.author.id) %>
+<% if signed_in? && current_author?(@project.author) %>
+<%= link_to "<<< Back to projects", projects_author_path(current_author.id) %>
+<% end %>
 
 <h1><%= @project.name %></h1>
-<p>by <%= @project.author.username %></p>
+<p>by <%= link_to @project.author.username, @project.author %></p>
+<% if signed_in? && current_author?(@project.author) %>
 <p><i><%= link_to "Edit", edit_project_path %></i></p>
+<% end %>
 <p><i><%= @project.elevator %></i></p>
 
 <p><%= @project.skeleton %></p>
