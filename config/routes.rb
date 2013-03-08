@@ -1,10 +1,16 @@
 StoryRough::Application.routes.draw do
+
+
+	# would be projects_author_do
     resources :authors do
     	member do
     		get :following, :followers, :projects
     	end
     end
-    resources :projects
+    # would be chapters_project_path, etc
+    resources :projects do
+    	resources :chapters, :characters, :locations, :pictures
+    end
     resources :sessions, only: [:new, :create, :destroy]
     resources :author_statuses, only: [:create, :destroy]
     resources :author_authors, only: [:create, :destroy]

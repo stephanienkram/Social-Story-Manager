@@ -1,0 +1,18 @@
+<% provide(:title, "New Chapter") %>
+
+<h1>New Chapter</h1>
+
+<%= form_for([@project, @chapter]) do |f| %>
+<%= render 'shared/error_messages', object: f.object %><br>
+
+<%= f.label :title %>
+<%= f.text_field :title %><br>
+
+<%= f.label :body %>
+<%= f.text_field :body %><br>
+
+<%= f.label :notes %>
+<%= f.text_field :notes %>
+
+<%= f.submit "Create new project" %>
+<% end %>

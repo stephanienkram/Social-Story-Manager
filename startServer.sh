@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rails server --binding=192.168.1.10
+rails s thin --binding=192.168.1.10

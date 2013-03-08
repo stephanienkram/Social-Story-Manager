@@ -1,0 +1,9 @@
+<p><%= link_to "Back to Chapter List", project_chapters_path(@project) %></p>
+<h1><%= @chapter.title %></h1>
+
+<% if signed_in? && current_author?(@project.author) %>
+<p><i><%= link_to "Edit", edit_project_chapter_path(@project) %></i></p>
+<% end %>
+
+<p><%= @chapter.body %></p>
+<p><%= @chapter.notes %></p>

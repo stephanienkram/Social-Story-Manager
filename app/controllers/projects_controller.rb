@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        @chapters = @project.chapters
     end
     
     def new
@@ -34,6 +35,7 @@ class ProjectsController < ApplicationController
 	
 	def index(id=nil)
 		@projects = Project.paginate(page: params[:page])
+		@index = true
 	end
 	
 	def destroy
@@ -44,9 +46,9 @@ class ProjectsController < ApplicationController
 
   private
 	def correct_author
-	  @project = current_author.projects.find_by_id(params[:id])
-	  rescue
-		  redirect_to @project if @project.nil?
+	  	@project = current_author.projects.find_by_id(params[:id])
+		@trueProject = Project.find_by_id(params[:id])
+		redirect_to @trueProject if @project.nil?
 	end
 
 end

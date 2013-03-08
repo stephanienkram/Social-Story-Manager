@@ -1,3 +1,11 @@
 <li>
-<%= link_to(raw("<span class='name'>") + project.name + raw("</span> by ") + project.author.username + raw("<br><div class='projTime'>") + time_ago_in_words(project.updated_at) + raw("</div><br>") + project.elevator, project) %>
+
+
+<p><span class="name"><%= link_to project.name, project %></span> by <span class="author"><%= link_to project.author.username, project.author %></span></p>
+<p><span class="projTime">updated <%= time_ago_in_words(project.updated_at) %> ago</span></p>
+<p><%= project.elevator %></p>
+<% if not @index %>
+	<div class="delete"><%= link_to "delete", project, method: :delete, data: {confirm: "Are you sure you want to delete " + project.name + "?"} %></div>
+<% end %>
+
 </li>

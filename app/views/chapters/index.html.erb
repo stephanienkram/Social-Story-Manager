@@ -1,0 +1,14 @@
+<h1>Chapters for <%= @project.name %></h1>
+
+<p>by <%= link_to @project.author.username, @project.author %></p>
+<% if signed_in? && current_author?(@project.author) %>
+<p><i><%= link_to "New Chapter", new_project_chapter_path(@project) %></i></p>
+<% end %>
+
+<ul class="indexList">
+<% if @chapters.any? %>
+<%= render @chapters %>
+<% end %>
+</ul>
+
+<div class="pag"><%= will_paginate @chapter %></div>

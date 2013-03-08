@@ -162,31 +162,28 @@ list-style-type:none;
 }
 
 .indexList li {
-border: black 1px solid;
-border: solid #cccccc 1px;
-box-shadow:0px 0px 3px #cccccc;
 height:100px;
-color: black;
 width:85%;
 margin:auto;
 margin-bottom:15px;
 position:relative;
+border-bottom: #999999 solid 1px;	
 }
 
-.indexList li:hover {
-box-shadow:0px 0px 3px blue;
-}
-
-.indexList li .name {
+.indexList .name {
 font-weight:bold;
-font-size:20px;
-display:inline;
-padding:5px;
+font-size:18px;
 }
 
-.indexList li a {
-display:block;
+.indexList .name a {
+color:blue;
 }
 
-.indexList li a:hover {
+.indexList .delete {
+}
+
+.indexList .delete a {
+}
+
+.indexList .delete a:hover {
 }

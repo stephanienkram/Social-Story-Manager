@@ -7,9 +7,9 @@ class Project < ActiveRecord::Base
   has_many :locations, dependent: :destroy
   has_many :pictures, dependent: :destroy
   
-	before_create :create_notice
+  before_create :create_notice
 	before_save :add_update
-    
+  
     default_scope order: 'projects.updated_at DESC'
   
   validates :name, presence: true
@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
   	def add_update
   		author = Author.find(author_id)
   		string = '<%= link_to @self.name, @self %>'
-  		author.author_statuses.create!(status: "%{name} updated %{title}" %{name: author.username, title: string}) 
+  		author.author_statuses.create!(status: "%s updated %{title}" %{name: author.username, title: string}) 
   	end
   	
   	def create_notice

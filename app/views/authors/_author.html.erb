@@ -1,5 +1,7 @@
 <li>
-<%= link_to(raw("%{image}<p><div class='name'>%{username}</div> | %{location} | %{projects}</p><p><i>%{summary}...</i></p>" % {image: image_tag("smiley-face.jpg", alt: "image"), username: author.username, location: author.location, projects: pluralize(author.projects.length, 'project'), summary: author.summary }), author) %>
+
+<p><span class='name'><%= link_to author.username, author %></span> | <%= author.location %> | <%= pluralize(author.projects.length, 'project') %></p>
+<p><%= if author.summary.length > 0 then author.summary else "I am a creative soul!" end %></p>
 
 <% if current_author && current_author.admin? && !current_author?(author) %>
 	<div class="delete"><%= link_to "delete", author, method: :delete, data: {confirm: "Are you sure you want to delete " + author.username + "?"} %></div>
